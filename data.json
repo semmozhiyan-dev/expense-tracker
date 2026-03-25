@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "amount": 12000.0,
+    "category": "food",
+    "date": "2026-03-23",
+    "note": "chicken rice"
+  }
+]
