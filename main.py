@@ -64,6 +64,21 @@ def add_expense():
 	expenses.append(expense)
 	save_expenses(expenses)
 	print("Expense added successfully")
+def view_expenses():
+	expenses = load_expenses()
+	if not expenses:
+		print("No expenses found.")
+		return
+	print("\nSaved Expenses")
+	for index, expense in enumerate(expenses, start=1):
+		amount = expense.get("amount", 0)
+		category = expense.get("category", "Unknown")
+		date_text = expense.get("date", "Unknown")
+		note = expense.get("note", "")
+		note_text = note if note else "N/A"
+		print(
+			f"{index}. Amount: Rs.{amount} | Category: {category} | Date: {date_text} | Note: {note_text}"
+		)
 def main():
 	while True:
 		show_menu()
@@ -71,7 +86,7 @@ def main():
 		if choice == "1":
 			add_expense()
 		elif choice == "2":
-			print("View Expenses selected")
+			view_expenses()
 		elif choice == "3":
 			print("Total Spending selected")
 		elif choice == "4":
