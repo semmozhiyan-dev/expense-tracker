@@ -79,6 +79,43 @@ def view_expenses():
 		print(
 			f"{index}. Amount: Rs.{amount} | Category: {category} | Date: {date_text} | Note: {note_text}"
 		)
+def total_spending():
+	expenses = load_expenses()
+	if not expenses:
+		print("No expenses available to calculate total.")
+		return
+	amounts = []
+	for expense in expenses:
+		amounts.append(float(expense.get("amount", 0)))
+	total = sum(amounts)
+	print(f"Total Spending: Rs.{total}")
+def filter_by_category():
+	expenses = load_expenses()
+	if not expenses:
+		print("No expenses available.")
+		return
+	category_input = input("Enter category (Food, Travel, etc): ").strip().lower()
+	if not category_input:
+		print("Category cannot be empty. Try again.")
+		return
+	filtered_expenses = []
+	for expense in expenses:
+		expense_category = str(expense.get("category", "")).strip().lower()
+		if expense_category == category_input:
+			filtered_expenses.append(expense)
+	if not filtered_expenses:
+		print("No expenses found for this category.")
+		return
+	print(f"\nFiltered Expenses for category: {category_input}")
+	for index, expense in enumerate(filtered_expenses, start=1):
+		amount = expense.get("amount", 0)
+		category = expense.get("category", "Unknown")
+		date_text = expense.get("date", "Unknown")
+		note = expense.get("note", "")
+		note_text = note if note else "N/A"
+		print(
+			f"{index}. Amount: Rs.{amount} | Category: {category} | Date: {date_text} | Note: {note_text}"
+		)
 def main():
 	while True:
 		show_menu()
@@ -88,9 +125,9 @@ def main():
 		elif choice == "2":
 			view_expenses()
 		elif choice == "3":
-			print("Total Spending selected")
+			total_spending()
 		elif choice == "4":
-			print("Filter by Category selected")
+			filter_by_category()
 		elif choice == "5":
 			print("Exiting... Goodbye!")
 			break
