@@ -10,5 +10,11 @@
     "category": "food",
     "date": "2026-03-23",
     "note": "chicken 65"
+  },
+  {
+    "amount": 500.0,
+    "category": "lunch",
+    "date": "2026-04-01",
+    "note": "briyani"
   }
 ]
